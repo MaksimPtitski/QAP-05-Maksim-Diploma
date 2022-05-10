@@ -2,18 +2,15 @@ from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException as WDE
 
-
-#email
-#password
-
 email_field = (By.NAME, 'emailAddress')
 sign_in_button = (By.CLASS_NAME, 'ui-button')
 password_first = (By.NAME, 'password')
 password_second = (By.NAME, 'passwordAgain')
 create_account = (By.NAME, 'action')
 authorisation_email_displayed = (By.ID, 'auth-text')
-authorisation_email = 'new15@test.com' #change only numbers and make sure it's length is 14 symbols
-registration_email = 'new19@test.com' #change only numbers and make sure it's length is 14 symbols
+authorisation_email = 'new15@test.com'
+registration_email = 'new26@test.com'
+password = 'qwerty'
 invalid_registration_email = 'wefwefwef'
 empty_registration_email = ''
 validation_login_error_field = (By.CLASS_NAME, 'error')
@@ -59,13 +56,12 @@ class LoginPage(BasePage):
         sign_in_element = self.find_element(sign_in_button)
         sign_in_element.click()
         password_first_element = self.find_element(password_first)
-        password_first_element.send_keys('qwerty')
+        password_first_element.send_keys(password)
         password_second_element = self.find_element(password_second)
-        password_second_element.send_keys('qwerty')
+        password_second_element.send_keys(password)
         create_account_element = self.find_element(create_account)
         create_account_element.click()
         authorisation_email_displayed_element = self.find_element(authorisation_email_displayed)
-        #print(authorisation_email_displayed_element.text)
         assert len(authorisation_email_displayed_element.text) == 22 + len(registration_email)
 
     def sign_in(self):
@@ -97,8 +93,6 @@ class LoginPage(BasePage):
         email_field_element.send_keys(authorisation_email)
         sign_in_element = self.find_element(sign_in_button)
         sign_in_element.click()
-        #password_first_element = self.find_element(password_first)
-        #password_first_element.send_keys('qwert')
         create_account_element = self.find_element(create_account)
         create_account_element.click()
         validation_message = self.find_element(validation_login_error_field)
@@ -113,12 +107,3 @@ class LoginPage(BasePage):
         reset_password_button_element.click()
         reset_text = self.find_element(reset_password_text_field)
         assert reset_text.text == reset_password_email_sent_text
-
-
-
-
-
-
-
-
-

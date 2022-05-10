@@ -17,5 +17,3 @@ class BasePage:
 
     def is_element_displayed(self, element):
         self.find_element(element).is_displayed()
-
-
